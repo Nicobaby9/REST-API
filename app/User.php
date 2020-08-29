@@ -68,4 +68,18 @@ class User extends Authenticatable implements JWTSubject
     public function mahasiswas() {
         return $this->hasOne(Mahasiswa::class);
     }
+
+    public function isAdmin() {
+        if ($this->role_id == 2) {
+            return true;
+        }
+        return false;
+    }
+
+    public function isMahasiswa() {
+        if ($this->role_id == 1) {
+            return true;
+        }
+        return false;
+    }
 }

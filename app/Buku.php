@@ -3,10 +3,15 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Pinjaman;
 
 class Buku extends Model
 {
-    public function pinjams() {
-    	//
+	protected $table = "bukus";
+
+    protected $guarded = [];
+
+    public function pinjam() {
+    	return $this->belongsTo(Pinjaman::class);
     }
 }

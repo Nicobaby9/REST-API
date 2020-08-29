@@ -8,7 +8,7 @@ class UserController extends Controller
 {
     public function __construct() {
 
-        $this->middlware('auth:api');
+        $this->middleware('auth:api');
     }
 
     /**

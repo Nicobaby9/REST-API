@@ -17,16 +17,33 @@ Route::namespace('Auth')->group(function(){
 
 	Route::post('register-user', 'RegisterController');
 	Route::post('login-user', 'LoginController');
-	Route::post('logout', 'LogoutController');
+	Route::post('logout-user', 'LogoutController');
 });
 
-Route::middleware('auth:api')->group(function(){
+Route::middleware(['auth', 'role'])->name('admin')->group(function(){
 
-	Route::post('create-new-admin', 'AdminController@store');
-	Route::get('login-admin/{id}', 'AdminController@show');
-	// Route::post('logout', 'LogoutController');
+	Route::post('register-admin', 'AdminController@store');
+	Route::get('check-admin/{id}', 'AdminController@show');
+
+	//BUKU
+	Route::post('register-buku', 'BukuController@store');
+	Route::patch('update-buku/{id}', 'BukuController@update');
+	Route::delete('delete-buku/{buku}', 'BukuController@destroy');
+
+	//PINJAMAN
+	Route::post('register-pinjaman', 'PinjamanController@store');
+	Route::get('check-pinjaman/{id}', 'PinjamanController@show');
+	Route::patch('update-pinjaman/{id}', 'PinjamanController@update');
+	Route::delete('delete-pinjaman/{id}', 'PinjamanController@destroy');
+
+
 });
 
-Route::get('user', 'UserController');
+Route::middleware(['auth'])->group(function() {
+	Route::post('register-mahasiswa', 'MahasiswaController@store');
+	Route::get('check-mahasiswa/{id}', 'MahasiswaController@show');
+	Route::patch('update-mahasiswa/{id}', 'MahasiswaController@update');
+	Route::delete('delete-mahasiswa/{id}', 'MahasiswaController@destroy');
+});
 
-// Route::post('register-mahasiswa', 'MahasiswaController@store');
+Route::get('check-user', 'UserController');

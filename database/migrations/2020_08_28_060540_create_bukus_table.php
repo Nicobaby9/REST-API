@@ -18,7 +18,8 @@ class CreateBukusTable extends Migration
             $table->string('kode_buku')->unique();
             $table->string('judul');
             $table->string('pengarang');
-            $table->string('penerbit');
+            $table->string('tahun_terbit');
+
             $table->timestamps();
         });
     }

@@ -13,18 +13,12 @@ class CreatePinjamenTable extends Migration
      */
     public function up()
     {
-        Schema::create('pinjamen', function (Blueprint $table) {
+        Schema::create('pinjamans', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->date('tanggal_peminjaman');
             $table->date('tanggal_batas_peminjaman');
-            $table->date('tanggal_pengembalian');
-            $table->boolean('status_ontime');
-
-            $table->unsignedBigInteger('mahasiswa_id')->nullable();
-            $table->foreign('mahasiswa_id')->references('id')->on('mahasiswas')->onDelete('cascade');
-
-            $table->unsignedBigInteger('buku_id')->nullable();
-            $table->foreign('buku_id')->references('id')->on('bukus')->onDelete('cascade');
+            $table->date('tanggal_pengembalian')->nullable();
+            $table->boolean('status_ontime')->default(0);
 
             $table->timestamps();
         });
@@ -37,6 +31,6 @@ class CreatePinjamenTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('pinjamen');
+        Schema::dropIfExists('pinjaman');
     }
 }
